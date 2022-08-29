@@ -12,10 +12,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('logout','logout')->name('logout');
     });
 
-    Route::controller(RegisterController::class)->group(function (){
-        Route::get('register', 'showRegistrationForm')->name('registrationForm');
-        Route::post('register', 'register')->name('register');
-    });
+//    Route::controller(RegisterController::class)->group(function (){
+//        Route::get('register', 'showRegistrationForm')->name('registrationForm');
+//        Route::post('register', 'register')->name('register');
+//    });
 
     Route::get('home', [ HomeController::class,'home' ])->name('home');
 });

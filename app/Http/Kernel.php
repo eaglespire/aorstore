@@ -4,6 +4,8 @@ namespace App\Http;
 
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\AdminLoggedIn;
+use App\Http\Middleware\Vendor;
+use App\Http\Middleware\VendorLoggedIn;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -66,6 +68,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin'=>Admin::class,
-        'admin.logged-in'=>AdminLoggedIn::class
+        'admin.logged-in'=>AdminLoggedIn::class,
+        'vendor'=>Vendor::class,
+        'vendor.logged-in'=>VendorLoggedIn::class,
     ];
 }

@@ -22,10 +22,6 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        DB::table('admins')->insert([
-            'name'=>'John Doe',
-            'email'=>'john234@gmail.com',
-            'password'=> Hash::make('password')
-        ]);
+        $this->call(AdminTableSeeder::class);
     }
 }
