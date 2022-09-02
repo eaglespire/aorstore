@@ -20,12 +20,14 @@ class AdminTableSeeder extends Seeder
         DB::table('admins')->insert([
             'name'=>'Administrator',
             'email'=>'admin@flipkart.com',
-            'password'=> Hash::make('password')
+            'password'=> Hash::make('password'),
+            'phone'=>'09031144063',
         ]);
         DB::table('admins')->insert([
             'name'=>'Administrator',
             'email'=>'support@flipkart.com',
-            'password'=> Hash::make('password')
+            'password'=> Hash::make('password'),
+            'phone'=>'09031144064',
         ]);
     }
 }
