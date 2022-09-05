@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('discount')->default(0);
             $table->decimal('price')->nullable();
             $table->string('SKU')->nullable();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
