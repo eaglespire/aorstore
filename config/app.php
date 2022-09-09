@@ -57,6 +57,8 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL'),
+    'meta_description'=>env('META_DESCRIPTION','E-Commerce Application'),
+    'meta_phone'=>env('META_PHONE','123456789'),
 
     /*
     |--------------------------------------------------------------------------
