@@ -40,12 +40,24 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(NewCategoryRequest $request)
+    public function store(Request $request)
     {
-        if ($request->createNewCategory()){
-            return redirect(route('admin.categories.index'))->with('success','new category added');
+        $request->validate([
+            'name'=>['required','string'],
+            'image'=>['nullable','image','max:1024']
+        ]);
+        $newCategory = Category::create([
+            'name'=>$request->input('name'),
+            'image'=>upload_single_image("categories") ,
+            'slug'=>$request->input('name')
+        ]);
+        if ($newCategory != null){
+            return redirect(route('admin.categories.index'))->with('success','Success!') ;
+        }  else{
+            return back()->with('error','Error!') ;
         }
-        return back()->with('error','Error!');
+
+
     }
 
     /**
@@ -109,15 +121,19 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-       $category = Category::findOrFail($id);
-       /*
-        * We need to check to see if this category has an image uploaded
-        */
-        $oldImagePath = public_path("storage/categories/$category->image");
-        if (file_exists($oldImagePath)){
-            unset($oldImagePath);
-        }
-       $category->delete();
-       return redirect()->route('admin.categories.index')->with('success','deleted');
+       try{
+           $category = Category::findOrFail($id);
+           /*
+            * We need to check to see if this category has an image uploaded
+            */
+           $oldImagePath = public_path("storage/categories/$category->image");
+           if (file_exists($oldImagePath)){
+               unset($oldImagePath);
+           }
+           $category->delete();
+           return redirect()->route('admin.categories.index')->with('success','deleted');
+       }   catch (\Exception $exception) {
+           return back()->with('error','Error deleting');
+       }
     }
 }

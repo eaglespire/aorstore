@@ -30,10 +30,10 @@ if (!function_exists('update_image')){
             //Get the image extension
             $ext = $image->getClientOriginalExtension();
             //Build the filename
-            $currentImagePath = substr(rand(1,9000000000000).time(),2);
-            $fileNameToStore = $currentImagePath.'.'.$ext;
+            $filename = substr(rand(1,9000000000000).time(),2);
+            $currentImagePath = "$filename.$ext";
             //Store the image
-            $image->storeAs($folder,$fileNameToStore,'public');
+            $image->storeAs($folder,$currentImagePath,'public');
         }
         return $currentImagePath;
     }

@@ -19,4 +19,9 @@ class Category extends Model
     {
         $this->attributes['name'] = ucfirst($value);
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
