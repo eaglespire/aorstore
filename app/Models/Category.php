@@ -24,4 +24,8 @@ class Category extends Model
     {
         return 'slug';
     }
+//    public function getCategoryCount(): int
+//    {
+//        return count($this->get());
+//    }
 }

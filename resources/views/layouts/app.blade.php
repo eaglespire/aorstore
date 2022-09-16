@@ -175,11 +175,6 @@
     </div>
 </div>
 
-
-    @include('partials._header')
-    <div class="mobile-header-active mobile-header-wrapper-style">
-    @include('partials._mobile_header_menu')
-</div>
     <main class="main">
     @yield('content')
 </main>

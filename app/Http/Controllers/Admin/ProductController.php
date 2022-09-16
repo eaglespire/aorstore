@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Product;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreProductRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $products = Product::get();
-        return view('products.index', compact('products'));
+        return view('admin.products.index');
     }
 
     /**
@@ -26,38 +27,37 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.create', [
+            'categories'=>Category::get()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        Product::create([
-            'name'=>$request->name,
-            'slug'=>Str::slug($request->name),
-        ]);
-        $request->session()->flash('success','Data added');
+        if ($request->createProduct()){
+            Alert::success('success','Product created!');
+            return redirect(route('admin.products.index'));
+           // return redirect(route('admin.products.index'))->
+        }
+        Alert::error('error','An error occurred!');
         return back();
     }
-    // Margarine by yada yada company
-    //margarine-by-yada-yada-company
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        return view('products.show', [
-            'product'=>$product
-        ]);
+        //
     }
 
     /**

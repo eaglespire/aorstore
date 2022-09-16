@@ -48,7 +48,7 @@ class CategoryController extends Controller
         ]);
         $newCategory = Category::create([
             'name'=>$request->input('name'),
-            'image'=>upload_single_image("categories") ,
+            'image'=>upload_single_image("categories","image") ,
             'slug'=>$request->input('name')
         ]);
         if ($newCategory != null){

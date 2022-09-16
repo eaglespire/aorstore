@@ -20,8 +20,11 @@ return new class extends Migration
             $table->string('images')->nullable();
             $table->integer('discount')->default(0);
             $table->decimal('price')->nullable();
+            $table->integer('quantity')->nullable();
             $table->string('SKU')->nullable();
             $table->string('slug')->unique();
+            $table->string('cover_image')->nullable();
+            $table->foreignId('category_id')->constrained()->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->timestamps();
         });
     }

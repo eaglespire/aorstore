@@ -19,6 +19,7 @@ class Product extends Model
         'slug',
         'quantity',
         'category_id',
+        'cover_image',
     ];
 
     public function getRouteKeyName()
@@ -29,8 +30,18 @@ class Product extends Model
     {
         $this->attributes['slug'] = Str::slug($value);
     }
-//    public function setPriceAttribute()
-//    {
-//
-//    }
+    public function setSKUAttribute($value)
+    {
+        $this->attributes['SKU'] = strtolower($value);
+    }
+    //mutator
+    public function setImagesAttribute($value)
+    {
+        $this->attributes['images'] = json_encode($value);
+    }
+    //accessor
+    public function getImagesAttribute($value)
+    {
+        return json_decode($value);
+    }
 }

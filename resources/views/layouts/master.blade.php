@@ -18,7 +18,7 @@
 </head>
 
 <body>
-
+@include('sweetalert::alert')
 <!-- Begin page -->
 <div id="wrapper">
 
@@ -148,7 +148,7 @@
 
 <!-- App js -->
 <script src="/assets/js/app.js"></script>
-
+@stack('scripts')
 </body>
 
 </html>
