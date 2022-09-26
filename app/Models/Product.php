@@ -44,4 +44,14 @@ class Product extends Model
     {
         return json_decode($value);
     }
+
+
+    /*
+     * Discounted price
+     */
+    public function discountedPrice($originalPrice,$discount)
+    {
+        $discountAmount = ($discount/100 * $originalPrice);
+        return  $originalPrice - $discountAmount;
+    }
 }

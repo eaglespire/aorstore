@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Task;
+use App\Models\User;
 
 
 require __DIR__ .'/admin.php';
@@ -77,3 +79,33 @@ require __DIR__ .'/frontend.php';
 //    session()->flash('success','Data received successfully');
 //    return back();
 //});
+
+Route::get('/card', function(Request $request){
+//    $user = User::find(2);
+//    dd($user);
+    $user = User::find(2);
+   // dd(count($user->unreadNotifications));
+   // dd($user->unreadNotifications[0]['data']);
+    return view('card');
+});
+Route::post('/card', function (Request $request){
+    //dd('Endpoint arrived');
+    $request->validate([
+        'title'=>'required',
+        'description'=>'required'
+    ]);
+    $task = new Task;
+    $task->title = $request['title'];
+    $task->description = $request['description'];
+    $task->save();
+    //The notify method needs a user instance
+    //find the user who is to receive the notification
+   // $user = User::find(2);
+   // $user->notify(new \App\Notifications\NewTask($task->title));
+    //dd($user);
+    //()->user()->notify();
+    //using the notification facade
+    $users = User::get();
+    \Illuminate\Support\Facades\Notification::send($users, new \App\Notifications\NewTask($task->title));
+    return back()->with('success','New Task Added');
+});

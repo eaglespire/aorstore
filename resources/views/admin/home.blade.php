@@ -167,125 +167,7 @@
 
     <div class="row">
         <div class="col-xl-8">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="mt-0 header-title mb-4">Latest Transactions</h4>
-                    <div class="table-responsive">
-                        <table class="table table-nowrap mb-0">
-                            <tbody>
-                            <tr>
-                                <td style="width: 60px;">
-                                    <img src="assets/images/users/user-2.jpg" alt="" class="thumb-sm rounded-circle">
-                                </td>
-                                <td>David Wiley
-                                    <p class="m-0 text-muted">On 02 Jun, 2019</p>
-                                </td>
-                                <td>Desktop</td>
-                                <td>
-                                    <i class="mdi mdi-checkbox-blank-circle text-success mr-1"></i> Confirm
-                                </td>
-                                <td>
-                                    $2105
-                                    <p class="m-0 text-muted font-14">Amount</p>
-                                </td>
-
-                                <td>
-                                    <div>
-                                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="assets/images/users/user-3.jpg" alt="" class="thumb-sm rounded-circle">
-                                </td>
-
-                                <td>Michael Gatlin
-                                    <p class="m-0 text-muted">On 03 Jun, 2019</p>
-                                </td>
-                                <td>laptop</td>
-                                <td>
-                                    <i class="mdi mdi-checkbox-blank-circle text-danger mr-1"></i> Payment expired
-                                </td>
-                                <td>
-                                    $1825
-                                    <p class="m-0 text-muted font-14">Amount</p>
-                                </td>
-                                <td>
-                                    <div>
-                                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="assets/images/users/user-4.jpg" alt="" class="thumb-sm rounded-circle">
-                                </td>
-                                <td>Steve Dietrich
-                                    <p class="m-0 text-muted">On 05 Jun, 2019</p>
-                                </td>
-                                <td>Tablet</td>
-                                <td>
-                                    <i class="mdi mdi-checkbox-blank-circle text-warning mr-1"></i> Waiting payment
-                                </td>
-                                <td>
-                                    $1460
-                                    <p class="m-0 text-muted font-14">Amount</p>
-                                </td>
-                                <td>
-                                    <div>
-                                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="assets/images/users/user-5.jpg" alt="" class="thumb-sm rounded-circle">
-                                </td>
-                                <td>James Harris
-                                    <p class="m-0 text-muted">On 07 Jun, 2019</p>
-                                </td>
-                                <td>Mobile</td>
-                                <td>
-                                    <i class="mdi mdi-checkbox-blank-circle text-success mr-1"></i> Confirm
-                                </td>
-                                <td>
-                                    $1434
-                                    <p class="m-0 text-muted font-14">Amount</p>
-                                </td>
-                                <td>
-                                    <div>
-                                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="assets/images/users/user-6.jpg" alt="" class="thumb-sm rounded-circle">
-                                </td>
-                                <td>Clay Johnson
-                                    <p class="m-0 text-muted">On 08 Jun, 2019</p>
-                                </td>
-                                <td>laptop</td>
-                                <td>
-                                    <i class="mdi mdi-checkbox-blank-circle text-success mr-1"></i> Confirm
-                                </td>
-                                <td>
-                                    $1759
-                                    <p class="m-0 text-muted font-14">Amount</p>
-                                </td>
-                                <td>
-                                    <div>
-                                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
+            <canvas id="myChart" width="400" height="200"></canvas>
         </div>
         <!-- end col -->
         <div class="col-xl-4">
@@ -406,3 +288,44 @@
     </div>
     <!-- end row -->
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Categories', 'Products', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of items',
+                    data: [{{ $no_of_categories }}, {{ $no_of_products }}, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+@endpush

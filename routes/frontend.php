@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ PageController::class,'welcome' ]);
+Route::get('products', [PageController::class,'products'])->name('products');
 Route::post('/add-to-cart', [ CartController::class,'addToCart' ])->name('addToCart');
 Route::get('test', function (Request $request){
     dd($request->session()->get('cart'));

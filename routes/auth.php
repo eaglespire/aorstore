@@ -10,10 +10,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('login', 'login')->name('login');
         Route::post('logout','logout')->name('logout');
     });
-    Route::get('home', [ HomeController::class,'home' ])->name('home');
+
 });
 
 
-Auth::routes(['verify'=>true]);
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
